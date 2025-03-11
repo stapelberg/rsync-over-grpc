@@ -48,3 +48,13 @@ In the first one, the log output will read something like:
 2025/03/11 20:31:32 grpcpipe.go:40: context done: context canceled
 2025/03/11 20:31:32 grpcpipe.go:30: closing streams
 ```
+
+## Architecture
+
+Typically, rsync is layered like this:
+
+![](_docs/rsync_layering.svg)
+
+In comparison, this demo programs uses the following layering:
+
+![](_docs/rsync_layering_grpc.svg)
