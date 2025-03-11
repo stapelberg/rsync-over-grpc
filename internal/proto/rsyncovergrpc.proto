@@ -1,0 +1,22 @@
+edition = "2023";
+
+package rsyncovergrpc;
+
+option go_package = "github.com/stapelberg/rsync-over-grpc/internal/proto";
+
+message TransferRequest {
+  repeated string args = 1;
+  int32 min_supported_protocol_version = 2;
+  int32 max_supported_protocol_version = 3;
+}
+
+message TransferChunk {
+  // request must be set on the first request of the stream,
+  // and is ignored on all other requests.
+  TransferRequest request = 1;
+  bytes chunk = 2;
+}
+
+service Rsync {
+  rpc Rsync(stream TransferChunk) returns (stream TransferChunk) {}
+}
